@@ -84,7 +84,6 @@ To track changes in a calendar view, you would make one or more **delta** functi
 appropriate [state tokens](/graph/delta-query-overview), to get the set of incremental changes since the last delta query. 
 
 
-# [HTTP](#tab/http)
 <!-- {
   "blockType": "request",
   "name": "event_delta"
@@ -94,15 +93,6 @@ GET https://graph.microsoft.com/v1.0/me/calendarView/delta?startdatetime={start_
 
 Prefer: odata.maxpagesize=2
 ```
-# [C#](#tab/csharp)
-[!INCLUDE [sample-code](../includes/snippets/csharp/event-delta-csharp-snippets.md)]
-[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
-
-# [JavaScript](#tab/javascript)
-[!INCLUDE [sample-code](../includes/snippets/javascript/event-delta-javascript-snippets.md)]
-[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
-
----
 
 
 ##### Response

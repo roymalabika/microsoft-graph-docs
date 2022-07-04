@@ -7,12 +7,13 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.id": "https://graph.microsoft.com/beta/policies/homeRealmDiscoveryPolicies/6c6f154f-cb39-4ff9-bf5b-62d5ad585cde",
+requestBody := graphmodels.New$refPostRequestBody()
+additionalData := map[string]interface{}{
+	"@odata.id" : "https://graph.microsoft.com/beta/policies/homeRealmDiscoveryPolicies/6c6f154f-cb39-4ff9-bf5b-62d5ad585cde", 
 }
-servicePrincipalId := "servicePrincipal-id"
-result, err := graphClient.ServicePrincipalsById(&servicePrincipalId).HomeRealmDiscoveryPolicies().$ref().Post(requestBody)
+requestBody.SetAdditionalData(additionalData)
+
+result, err := graphClient.ServicePrincipalsById("servicePrincipal-id").HomeRealmDiscoveryPolicies().$ref().Post(requestBody)
 
 
 ```

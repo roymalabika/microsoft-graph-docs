@@ -7,17 +7,18 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewConversationMember()
-requestBody.SetRoles( []String {
+requestBody := graphmodels.NewConversationMember()
+roles := []String {
 	"owner",
+
 }
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.aadUserConversationMember",
+requestBody.SetRoles(roles)
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.aadUserConversationMember", 
 }
-teamId := "team-id"
-channelId := "channel-id"
-conversationMemberId := "conversationMember-id"
-graphClient.TeamsById(&teamId).ChannelsById(&channelId).MembersById(&conversationMemberId).Patch(requestBody)
+requestBody.SetAdditionalData(additionalData)
+
+graphClient.TeamsById("team-id").ChannelsById("channel-id").MembersById("conversationMember-id").Patch(requestBody)
 
 
 ```

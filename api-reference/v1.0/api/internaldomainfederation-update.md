@@ -83,6 +83,8 @@ If successful, this method returns a `200 OK` response code and an updated [inte
 ## Examples
 
 ### Request
+
+# [HTTP](#tab/http)
 <!-- {
   "blockType": "request",
   "name": "update_internaldomainfederation"
@@ -97,6 +99,13 @@ Content-Type: application/json
   "federatedIdpMfaBehavior": "acceptIfMfaDoneByFederatedIdp"
 }
 ```
+
+# [Go](#tab/go)
+[!INCLUDE [sample-code](../includes/snippets/go/update-internaldomainfederation-go-snippets.md)]
+[!INCLUDE [sdk-documentation](../includes/snippets/snippets-sdk-documentation-link.md)]
+
+---
+
 
 
 ### Response

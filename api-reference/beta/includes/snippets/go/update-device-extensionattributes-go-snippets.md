@@ -7,13 +7,16 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewDevice()
-extensionAttributes := msgraphsdk.NewOnPremisesExtensionAttributes()
-requestBody.SetExtensionAttributes(extensionAttributes)
+requestBody := graphmodels.NewDevice()
+additionalData := map[string]interface{}{
+extensionAttributes := graphmodels.New()
 extensionAttribute1 := "BYOD-Device"
-extensionAttributes.SetExtensionAttribute1(&extensionAttribute1)
-deviceId := "device-id"
-graphClient.DevicesById(&deviceId).Patch(requestBody)
+extensionAttributes.SetExtensionAttribute1(&extensionAttribute1) 
+	requestBody.SetExtensionAttributes(extensionAttributes)
+}
+requestBody.SetAdditionalData(additionalData)
+
+graphClient.DevicesById("device-id").Patch(requestBody)
 
 
 ```

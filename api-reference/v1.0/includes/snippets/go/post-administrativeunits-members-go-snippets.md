@@ -7,12 +7,13 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.New()
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.id": "https://graph.microsoft.com/v1.0/groups/{id}",
+requestBody := graphmodels.New$refPostRequestBody()
+additionalData := map[string]interface{}{
+	"@odata.id" : "https://graph.microsoft.com/v1.0/groups/{id}", 
 }
-administrativeUnitId := "administrativeUnit-id"
-result, err := graphClient.Directory().AdministrativeUnitsById(&administrativeUnitId).Members().$ref().Post(requestBody)
+requestBody.SetAdditionalData(additionalData)
+
+result, err := graphClient.Directory().AdministrativeUnitsById("administrativeUnit-id").Members().$ref().Post(requestBody)
 
 
 ```

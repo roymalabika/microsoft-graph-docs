@@ -7,33 +7,55 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewContact()
+requestBody := graphmodels.NewContact()
 givenName := "Pavel"
-requestBody.SetGivenName(&givenName)
+requestBody.SetGivenName(&givenName) 
 surname := "Bansky"
-requestBody.SetSurname(&surname)
-requestBody.SetEmailAddresses( []TypedEmailAddress {
-	msgraphsdk.NewTypedEmailAddress(),
-	SetAdditionalData(map[string]interface{}{
-		"address": "pavelb@contoso.onmicrosoft.com",
-		"name": "Pavel Bansky",
-		"type": "personal",
-	}
-	msgraphsdk.NewTypedEmailAddress(),
-	SetAdditionalData(map[string]interface{}{
-		"address": "pavelb@fabrikam.onmicrosoft.com",
-		"name": "Pavel Bansky",
-		"type": "other",
-		"otherLabel": "Volunteer work",
-	}
+requestBody.SetSurname(&surname) 
+
+
+emailAddress := graphmodels.NewEmailAddress()
+address := "pavelb@contoso.onmicrosoft.com"
+emailAddress.SetAddress(&address) 
+name := "Pavel Bansky"
+emailAddress.SetName(&name) 
+additionalData := map[string]interface{}{
+	"type" : "personal", 
 }
-requestBody.SetPhones( []Phone {
-	msgraphsdk.NewPhone(),
+emailAddress.SetAdditionalData(additionalData)
+emailAddress1 := graphmodels.NewEmailAddress()
+address := "pavelb@fabrikam.onmicrosoft.com"
+emailAddress1.SetAddress(&address) 
+name := "Pavel Bansky"
+emailAddress1.SetName(&name) 
+additionalData := map[string]interface{}{
+	"type" : "other", 
+	"otherLabel" : "Volunteer work", 
+}
+emailAddress1.SetAdditionalData(additionalData)
+
+emailAddresses := []graphmodels.EmailAddressable {
+	emailAddress,
+	emailAddress1,
+
+}
+requestBody.SetEmailAddresses(emailAddresses)
+additionalData := map[string]interface{}{
+
+
+ := graphmodels.New()
 number := "+1 732 555 0102"
-	SetNumber(&number)
+.SetNumber(&number) 
 type := "business"
-	SetType(&type)
+.SetType(&type) 
+
+	phones := []graphmodels.Objectable {
+		,
+
+	}
 }
+requestBody.SetAdditionalData(additionalData)
+
 result, err := graphClient.Me().Contacts().Post(requestBody)
 
 

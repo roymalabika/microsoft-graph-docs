@@ -7,27 +7,42 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewMessage()
+requestBody := graphmodels.NewMessage()
 subject := "Party planning"
-requestBody.SetSubject(&subject)
-requestBody.SetToRecipients( []Recipient {
-	msgraphsdk.NewRecipient(),
-emailAddress := msgraphsdk.NewEmailAddress()
-	SetEmailAddress(emailAddress)
+requestBody.SetSubject(&subject) 
+
+
+recipient := graphmodels.NewRecipient()
+emailAddress := graphmodels.NewEmailAddress()
 name := "Samantha Booth"
-	emailAddress.SetName(&name)
+emailAddress.SetName(&name) 
 address := "samanthab@contoso.onmicrosoft.com"
-	emailAddress.SetAddress(&address)
+emailAddress.SetAddress(&address) 
+recipient.SetEmailAddress(emailAddress)
+
+toRecipients := []graphmodels.Recipientable {
+	recipient,
+
 }
-requestBody.SetMentions( []Mention {
-	msgraphsdk.NewMention(),
-mentioned := msgraphsdk.NewEmailAddress()
-	SetMentioned(mentioned)
+requestBody.SetToRecipients(toRecipients)
+additionalData := map[string]interface{}{
+
+
+ := graphmodels.New()
+mentioned := graphmodels.New()
 name := "Dana Swope"
-	mentioned.SetName(&name)
+mentioned.SetName(&name) 
 address := "danas@contoso.onmicrosoft.com"
-	mentioned.SetAddress(&address)
+mentioned.SetAddress(&address) 
+.SetMentioned(mentioned)
+
+	mentions := []graphmodels.Objectable {
+		,
+
+	}
 }
+requestBody.SetAdditionalData(additionalData)
+
 result, err := graphClient.Me().Messages().Post(requestBody)
 
 

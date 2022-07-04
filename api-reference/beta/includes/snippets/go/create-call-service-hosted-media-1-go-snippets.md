@@ -7,47 +7,62 @@ description: "Automatically generated file. DO NOT MODIFY"
 //THE GO SDK IS IN PREVIEW. NON-PRODUCTION USE ONLY
 graphClient := msgraphsdk.NewGraphServiceClient(requestAdapter)
 
-requestBody := msgraphsdk.NewCall()
+requestBody := graphmodels.NewCall()
 callbackUri := "https://bot.contoso.com/callback"
-requestBody.SetCallbackUri(&callbackUri)
-requestBody.SetTargets( []InvitationParticipantInfo {
-	msgraphsdk.NewInvitationParticipantInfo(),
-identity := msgraphsdk.NewIdentitySet()
-	SetIdentity(identity)
-user := msgraphsdk.NewIdentity()
-	identity.SetUser(user)
+requestBody.SetCallbackUri(&callbackUri) 
+
+
+invitationParticipantInfo := graphmodels.NewInvitationParticipantInfo()
+identity := graphmodels.NewIdentitySet()
+user := graphmodels.NewIdentity()
 displayName := "John"
-	user.SetDisplayName(&displayName)
+user.SetDisplayName(&displayName) 
 id := "112f7296-5fa4-42ca-bae8-6a692b15d4b8"
-	user.SetId(&id)
-	user.SetAdditionalData(map[string]interface{}{
-		"@odata.type": "#microsoft.graph.identity",
-	}
-	identity.SetAdditionalData(map[string]interface{}{
-		"@odata.type": "#microsoft.graph.identitySet",
-	}
-	SetAdditionalData(map[string]interface{}{
-		"@odata.type": "#microsoft.graph.invitationParticipantInfo",
-	}
+user.SetId(&id) 
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.identity", 
 }
-requestBody.SetRequestedModalities( []Modality {
+user.SetAdditionalData(additionalData)
+identity.SetUser(user)
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.identitySet", 
+}
+identity.SetAdditionalData(additionalData)
+invitationParticipantInfo.SetIdentity(identity)
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.invitationParticipantInfo", 
+}
+invitationParticipantInfo.SetAdditionalData(additionalData)
+
+targets := []graphmodels.InvitationParticipantInfoable {
+	invitationParticipantInfo,
+
+}
+requestBody.SetTargets(targets)
+requestedModalities := []graphmodels.Modalityable {
 	"audio",
+
 }
-callOptions := msgraphsdk.NewCallOptions()
+requestBody.SetRequestedModalities(requestedModalities)
+callOptions := graphmodels.NewCallOptions()
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.outgoingCallOptions", 
+	isContentSharingNotificationEnabled := true
+callOptions.SetIsContentSharingNotificationEnabled(&isContentSharingNotificationEnabled) 
+}
+callOptions.SetAdditionalData(additionalData)
 requestBody.SetCallOptions(callOptions)
-isContentSharingNotificationEnabled := true
-callOptions.SetIsContentSharingNotificationEnabled(&isContentSharingNotificationEnabled)
-callOptions.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.outgoingCallOptions",
+mediaConfig := graphmodels.NewMediaConfig()
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.serviceHostedMediaConfig", 
 }
-mediaConfig := msgraphsdk.NewMediaConfig()
+mediaConfig.SetAdditionalData(additionalData)
 requestBody.SetMediaConfig(mediaConfig)
-mediaConfig.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.serviceHostedMediaConfig",
+additionalData := map[string]interface{}{
+	"@odata.type" : "#microsoft.graph.call", 
 }
-requestBody.SetAdditionalData(map[string]interface{}{
-	"@odata.type": "#microsoft.graph.call",
-}
+requestBody.SetAdditionalData(additionalData)
+
 result, err := graphClient.Communications().Calls().Post(requestBody)
 
 
